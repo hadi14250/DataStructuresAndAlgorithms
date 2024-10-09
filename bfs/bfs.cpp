@@ -1,0 +1,59 @@
+#include "bfs.hpp"
+
+bfs::bfs(std::vector<std::vector<int>> graph, std::pair<int,int> vertex)
+{
+    int i = vertex.first;
+    int j = vertex.second;
+    this->_visited.resize(graph.size());
+    this->_graph.resize(graph.size());
+    this->_queue.push_back(std::pair(i, j));
+    for(size_t i = 0; i < graph.size(); i++)
+    {
+         this->_visited[i].resize(graph[i].size(), false);
+         this->_graph[i].resize(graph[i].size());
+         for(size_t j = 0; j < this->_graph[i].size(); j++)
+            this->_graph[i][j] = graph[i][j];
+    }
+}
+
+void bfs::printGraph()
+{
+    for (const auto& row : _graph) {
+        for (int val : row) {
+            std::cout << val << " ";
+        }
+        std::cout << std::endl;
+    }
+    for(size_t i = 0; i < _graph[0].size(); i++)
+        std::cout << "--";
+    std::cout << std::endl;
+}
+
+void bfs::printQueue()
+{
+    for (size_t i = 0; i < this->_queue.size(); i++)
+        std::cout << "vertex: " << "(" << _queue[i].first << ", " << _queue[i].second << ")"  << " - with value: " << _graph[_queue[i].first][_queue[i].second] << std::endl;
+    for(size_t i = 0; i < _visited[0].size(); i++)
+        std::cout << "--";
+    std::cout << std::endl;
+}
+
+void bfs::printVisited()
+{
+    for (const auto& row : _visited) {
+        for (bool val : row) {
+            std::cout << val << " ";
+        }
+        std::cout << std::endl;
+    }
+    for(size_t i = 0; i < _visited[0].size(); i++)
+        std::cout << "--";
+    std::cout << std::endl;
+}
+
+void    bfs::markVisited(size_t i, size_t j)
+{
+    if (i < 0 || j < 0 || i >= this->_graph.size() || j >= this->_graph[i].size())
+        throw ("Hello");
+    this->_visited[i][j] = true;
+}
