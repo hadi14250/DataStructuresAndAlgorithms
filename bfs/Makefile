@@ -1,4 +1,3 @@
-
 SRCS			= main.cpp bfs.cpp
 					
 OBJS			= $(SRCS:.cpp=.o)
