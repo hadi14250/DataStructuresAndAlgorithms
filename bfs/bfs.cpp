@@ -11,7 +11,7 @@ bfs::bfs(std::vector<std::vector<int>> graph, std::pair<int,int> vertex)
     {
          this->_visited[i].resize(graph[i].size(), false);
          this->_graph[i].resize(graph[i].size());
-         for(size_t j = 0; j < this->_graph[i].size(); j++)
+         for(size_t j = 0; j < graph[i].size(); j++)
             this->_graph[i][j] = graph[i][j];
     }
 }
@@ -51,9 +51,19 @@ void bfs::printVisited()
     std::cout << std::endl;
 }
 
+
 void    bfs::markVisited(size_t i, size_t j)
 {
     if (i < 0 || j < 0 || i >= this->_graph.size() || j >= this->_graph[i].size())
-        throw ("Hello");
+        throw ("Out of bound");
     this->_visited[i][j] = true;
+}
+
+void    bfs::perform_search()
+{
+    while(!_queue.empty()) {
+        std::pair<int,int> popped = _queue.front();
+        _queue.pop_front();
+        std::cout << "popped->first: " << popped.first << ", popped->second: " << popped.second << std::endl;
+    }
 }

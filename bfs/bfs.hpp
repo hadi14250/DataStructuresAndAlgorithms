@@ -21,4 +21,5 @@ public:
     void    printQueue();
     void    printVisited();
     void    markVisited(size_t i, size_t j);
+    void    perform_search();
 };
