@@ -40,7 +40,7 @@ void bfs::printQueue()
         << ")"  << " - with value: "
         << _graph[_queue[i].first][_queue[i].second]
         <<  " -> "
-        << (isVisited({_queue[i].first, _queue[i].second}) ? ("visited") : ("not visited"))
+        << (isVisited({_queue[i].first, _queue[i].second}) ? "visited" : "not visited")
         << std::endl;
 
     for(size_t i = 0; i < _visited[0].size(); i++)
