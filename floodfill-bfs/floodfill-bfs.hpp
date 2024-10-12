@@ -21,12 +21,12 @@ private:
     bool    isValidNeighbor(std::pair<int,int> neighbor, int graphVertexValue);
 
 public:
-    bfs(std::vector<std::vector<int> > graph, std::pair<int,int> vertex);
+    bfs(std::vector<std::vector<int> > graph);
 
     void    printGraph();
     void    printQueue();
     void    printVisited();
-    void    perform_search();
+    void    perform_search(std::pair<int,int> targetVertex);
     void    printValidPath();
 
 };

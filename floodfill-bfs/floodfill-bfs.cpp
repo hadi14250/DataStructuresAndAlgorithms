@@ -1,11 +1,8 @@
 #include "floodfill-bfs.hpp"
 
-bfs::bfs(std::vector<std::vector<int>> graph, std::pair<int, int> vertex) {
-    int i = vertex.first;
-    int j = vertex.second;
+bfs::bfs(std::vector<std::vector<int>> graph) {
     this->_visited.resize(graph.size());
     this->_graph.resize(graph.size());
-    this->_queue.push_back(std::pair(i, j));
     for (size_t i = 0; i < graph.size(); i++)
     {
         this->_visited[i].resize(graph[i].size(), false);
@@ -112,7 +109,9 @@ void bfs::printValidPath() {
     std::cout << std::endl;
 }
 
-void bfs::perform_search() {
+void bfs::perform_search(std::pair<int,int> targetVertex) {
+    _validPath.clear();
+    _queue.push_back(targetVertex);
     while (!_queue.empty()) {
         std::pair<int, int> vertex = _queue.front();
         _queue.pop_front();
