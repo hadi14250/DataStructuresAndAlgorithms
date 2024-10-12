@@ -27,3 +27,4 @@ Release/
 *.sln
 *.gch
 *.pch
+.DS_Store
