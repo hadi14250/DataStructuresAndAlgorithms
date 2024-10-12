@@ -15,13 +15,22 @@ std::vector<std::vector<int> > graph = {
 
 int main() {
 
-    bfs floodfill1(graph);
-    floodfill1.perform_search({2, 4});
-    floodfill1.printValidPath();
+    bfs floodfill(graph);
+    floodfill.perform_search({2, 4});
+    floodfill.printValidPath();
 
-    floodfill1.perform_search({1, 0});
-    floodfill1.printValidPath();
+    floodfill.perform_search({1, 0});
+    floodfill.printValidPath();
 
-    floodfill1.perform_search({9, 0});
-    floodfill1.printValidPath();
+    floodfill.perform_search({9, 0});
+    floodfill.printValidPath();
+
+    floodfill.perform_diagonal_search({9, 0});
+    floodfill.printValidPath();
+
+        floodfill.perform_diagonal_search({2, 4});
+    floodfill.printValidPath();
+
+
+
 }

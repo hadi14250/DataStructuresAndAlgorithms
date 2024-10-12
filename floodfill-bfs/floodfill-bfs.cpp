@@ -64,6 +64,12 @@ void bfs::markVisited(std::pair<size_t, size_t> vertex) {
     this->_visited[vertex.first][vertex.second] = true;
 }
 
+void    bfs::resetVisted() {
+    for (auto& row : _visited) {
+        std::fill(row.begin(), row.end(), false);
+    }
+}
+
 bool bfs::isOutOfBound(std::pair<size_t, size_t> vertex) {
     return (vertex.first < 0 || vertex.second < 0 || vertex.first >= this->_graph.size() || vertex.second >= this->_graph[vertex.first].size());
 }
@@ -91,6 +97,60 @@ std::vector<std::pair<int, int>> bfs::getNeighbors(std::pair<int, int> vertex) {
     return (neighbors);
 }
 
+std::vector<std::pair<int, int>> bfs::getDiagonalNeighbors(std::pair<int, int> vertex) {
+    std::vector<std::pair<int, int>> neighbors;
+    int graphVertexValue = _graph[vertex.first][vertex.second];
+    std::pair<int, int> leftUp = {vertex.first - 1, vertex.second - 1};
+    std::pair<int, int> rightUp = {vertex.first - 1, vertex.second + 1};
+    std::pair<int, int> leftDown = {vertex.first + 1, vertex.second - 1};
+    std::pair<int, int> rightDown = {vertex.first + 1, vertex.second + 1};
+
+    if (isValidNeighbor(leftUp, graphVertexValue))
+        neighbors.push_back(leftUp);
+    if (isValidNeighbor(rightUp, graphVertexValue))
+        neighbors.push_back(rightUp);
+    if (isValidNeighbor(leftDown, graphVertexValue))
+        neighbors.push_back(leftDown);
+    if (isValidNeighbor(rightDown, graphVertexValue))
+        neighbors.push_back(rightDown);
+    return (neighbors);
+}
+
+std::vector<std::pair<int, int>> bfs::getAllNeighbors(std::pair<int, int> vertex) {
+    std::vector<std::pair<int, int>> neighbors;
+    int graphVertexValue = _graph[vertex.first][vertex.second];
+
+    std::pair<int, int> left = {vertex.first, vertex.second - 1};
+    std::pair<int, int> right = {vertex.first, vertex.second + 1};
+    std::pair<int, int> up = {vertex.first - 1, vertex.second};
+    std::pair<int, int> down = {vertex.first + 1, vertex.second};
+
+    if (isValidNeighbor(left, graphVertexValue))
+        neighbors.push_back(left);
+    if (isValidNeighbor(right, graphVertexValue))
+        neighbors.push_back(right);
+    if (isValidNeighbor(up, graphVertexValue))
+        neighbors.push_back(up);
+    if (isValidNeighbor(down, graphVertexValue))
+        neighbors.push_back(down);
+
+    std::pair<int, int> leftUp = {vertex.first - 1, vertex.second - 1};
+    std::pair<int, int> rightUp = {vertex.first - 1, vertex.second + 1};
+    std::pair<int, int> leftDown = {vertex.first + 1, vertex.second - 1};
+    std::pair<int, int> rightDown = {vertex.first + 1, vertex.second + 1};
+
+    if (isValidNeighbor(leftUp, graphVertexValue))
+        neighbors.push_back(leftUp);
+    if (isValidNeighbor(rightUp, graphVertexValue))
+        neighbors.push_back(rightUp);
+    if (isValidNeighbor(leftDown, graphVertexValue))
+        neighbors.push_back(leftDown);
+    if (isValidNeighbor(rightDown, graphVertexValue))
+        neighbors.push_back(rightDown);
+
+    return (neighbors);
+}
+
 void bfs::printValidPath() {
     std::cout << "The Valid Path Is:\n"
               << std::endl;
@@ -110,6 +170,25 @@ void bfs::printValidPath() {
 }
 
 void bfs::perform_search(std::pair<int,int> targetVertex) {
+    resetVisted();
+    _validPath.clear();
+    _queue.push_back(targetVertex);
+    while (!_queue.empty()) {
+        std::pair<int, int> vertex = _queue.front();
+        _queue.pop_front();
+        if (!isVisited(vertex)) {
+            markVisited(vertex);
+            _validPath.push_back(vertex);
+            std::vector<std::pair<int, int>> neighbors = getNeighbors(vertex);
+            for (auto neighbor : neighbors)
+                if (!isVisited(neighbor))
+                    _queue.push_back(neighbor);
+        }
+    }
+}
+
+void bfs::perform_diagonal_search(std::pair<int,int> targetVertex) {
+    resetVisted();
     _validPath.clear();
     _queue.push_back(targetVertex);
     while (!_queue.empty()) {
@@ -119,7 +198,7 @@ void bfs::perform_search(std::pair<int,int> targetVertex) {
         if (!isVisited(vertex)) {
             markVisited(vertex);
             _validPath.push_back(vertex);
-            std::vector<std::pair<int, int>> neighbors = getNeighbors(vertex);
+            std::vector<std::pair<int, int>> neighbors = getAllNeighbors(vertex);
             for (auto neighbor : neighbors)
                 if (!isVisited(neighbor))
                     _queue.push_back(neighbor);
