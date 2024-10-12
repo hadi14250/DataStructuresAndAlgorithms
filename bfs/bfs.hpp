@@ -21,5 +21,6 @@ public:
     void    printQueue();
     void    printVisited();
     void    markVisited(std::pair<size_t,size_t> vertex);
+    bool    isVisited(std::pair<size_t,size_t> vertex);
     void    perform_search();
 };
