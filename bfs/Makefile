@@ -4,9 +4,11 @@ OBJS			= $(SRCS:.cpp=.o)
 
 CXX				= c++
 RM				= rm -f
-CXXFLAGS		=  -std=c++17 -Wall -Wextra -Werror
+CXXFLAGS		= -std=c++17 -Wall -Wextra -Werror
 
 NAME			= bfs
+
+ARGS := $(filter-out $(firstword $(MAKECMDGOALS)),$(MAKECMDGOALS))
 
 all:			$(NAME)
 
@@ -17,7 +19,16 @@ clean:
 				$(RM) $(OBJS)
 
 fclean:			clean
-				$(RM) $(NAME)
+					$(RM) $(NAME)
 
 re:				fclean $(NAME)
-					rm *.o
+					$(RM) $(OBJS)
+
+exec: 			$(NAME)
+					@./$(NAME) $(ARGS)
+
+rexec: 			re
+					@./$(NAME) $(ARGS)
+
+%:
+	@:

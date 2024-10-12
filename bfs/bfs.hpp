@@ -20,6 +20,6 @@ public:
     void    printGraph();
     void    printQueue();
     void    printVisited();
-    void    markVisited(size_t i, size_t j);
+    void    markVisited(std::pair<size_t,size_t> vertex);
     void    perform_search();
 };

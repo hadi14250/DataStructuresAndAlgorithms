@@ -32,7 +32,17 @@ void bfs::printGraph()
 void bfs::printQueue()
 {
     for (size_t i = 0; i < this->_queue.size(); i++)
-        std::cout << "vertex: " << "(" << _queue[i].first << ", " << _queue[i].second << ")"  << " - with value: " << _graph[_queue[i].first][_queue[i].second] << std::endl;
+        std::cout
+        << "vertex: "
+        << "("
+        << _queue[i].first
+        << ", " << _queue[i].second
+        << ")"  << " - with value: "
+        << _graph[_queue[i].first][_queue[i].second]
+        <<  " -> "
+        << ((_visited[_queue[i].first][_queue[i].second] == true) ? ("visited") : ("not visited"))
+        << std::endl;
+
     for(size_t i = 0; i < _visited[0].size(); i++)
         std::cout << "--";
     std::cout << std::endl;
@@ -52,11 +62,11 @@ void bfs::printVisited()
 }
 
 
-void    bfs::markVisited(size_t i, size_t j)
+void    bfs::markVisited(std::pair<size_t,size_t> vertex)
 {
-    if (i < 0 || j < 0 || i >= this->_graph.size() || j >= this->_graph[i].size())
+    if (vertex.first < 0 || vertex.second < 0 || vertex.first >= this->_graph.size() || vertex.second >= this->_graph[vertex.first].size())
         throw ("Out of bound");
-    this->_visited[i][j] = true;
+    this->_visited[vertex.first][vertex.second] = true;
 }
 
 void    bfs::perform_search()
