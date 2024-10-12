@@ -77,9 +77,12 @@ void    bfs::markVisited(std::pair<size_t,size_t> vertex)
 void    bfs::perform_search()
 {
     while(!_queue.empty()) {
-        std::pair<int,int> popped = _queue.front();
+        std::pair<int,int> vertex = _queue.front();
         _queue.pop_front();
 
-        std::cout << "popped->first: " << popped.first << ", popped->second: " << popped.second << std::endl;
+        if(!isVisited(vertex))  {
+            markVisited(vertex);
+            std::cout << "Vertext (" << vertex.first << ", " << vertex.second << ")"  << " Has been visited" << std::endl;
+        }
     }
 }

@@ -12,6 +12,10 @@ int main()
 {
     bfs hadi(graph, {2, 3});
 
+   hadi.printQueue();
+
+    hadi.perform_search();
+
     hadi.printGraph();
     hadi.printQueue();
 }
