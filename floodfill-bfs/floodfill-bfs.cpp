@@ -152,8 +152,11 @@ std::vector<std::pair<int, int>> bfs::getAllNeighbors(std::pair<int, int> vertex
 }
 
 void bfs::printValidPath() {
-    std::cout << "The Valid Path Is:\n"
-              << std::endl;
+    std::cout   << "The valid path for vertex ("
+                << _targetVertex.first << ", "
+                << _targetVertex.second
+                << ") is:\n"
+                << std::endl;
 
     for (size_t i = 0; i < _graph.size(); i++) {
         for (size_t j = 0; j < _graph[i].size(); j++) {
@@ -170,6 +173,14 @@ void bfs::printValidPath() {
 }
 
 void bfs::perform_search(std::pair<int,int> targetVertex) {
+    if (isOutOfBound(targetVertex))
+    {
+        std::cout << "\033[31m"
+          << "Vertex (" << targetVertex.first << ", " << targetVertex.second << ") is out of range" 
+          << "\033[0m" << std::endl;
+        return ;
+    }
+    _targetVertex = targetVertex;
     resetVisted();
     _validPath.clear();
     _queue.push_back(targetVertex);
@@ -188,6 +199,14 @@ void bfs::perform_search(std::pair<int,int> targetVertex) {
 }
 
 void bfs::perform_diagonal_search(std::pair<int,int> targetVertex) {
+    if (isOutOfBound(targetVertex))
+    {
+        std::cout << "\033[31m"
+          << "Vertex (" << targetVertex.first << ", " << targetVertex.second << ") is out of range" 
+          << "\033[0m" << std::endl;
+        return ;
+    }
+    _targetVertex = targetVertex;
     resetVisted();
     _validPath.clear();
     _queue.push_back(targetVertex);

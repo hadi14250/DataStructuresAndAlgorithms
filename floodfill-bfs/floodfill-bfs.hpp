@@ -11,6 +11,7 @@ private:
     bfs();
 
     std::vector<std::vector<bool> >         _visited;
+    std::pair<int,int>                      _targetVertex;
     std::vector<std::vector<int> >          _graph;
     std::deque<std::pair<size_t, size_t> >  _queue;
     std::vector<std::pair<int,int> >        _validPath;
