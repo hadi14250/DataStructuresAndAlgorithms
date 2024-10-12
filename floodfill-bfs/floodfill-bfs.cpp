@@ -3,8 +3,7 @@
 bfs::bfs(std::vector<std::vector<int>> graph) {
     this->_visited.resize(graph.size());
     this->_graph.resize(graph.size());
-    for (size_t i = 0; i < graph.size(); i++)
-    {
+    for (size_t i = 0; i < graph.size(); i++) {
         this->_visited[i].resize(graph[i].size(), false);
         this->_graph[i].resize(graph[i].size());
         for (size_t j = 0; j < graph[i].size(); j++)
