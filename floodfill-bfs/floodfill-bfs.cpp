@@ -80,38 +80,17 @@ bool bfs::isValidNeighbor(std::pair<int, int> neighbor, int graphVertexValue) {
 std::vector<std::pair<int, int>> bfs::getNeighbors(std::pair<int, int> vertex) {
     std::vector<std::pair<int, int>> neighbors;
     int graphVertexValue = _graph[vertex.first][vertex.second];
-    std::pair<int, int> left = {vertex.first, vertex.second - 1};
-    std::pair<int, int> right = {vertex.first, vertex.second + 1};
-    std::pair<int, int> up = {vertex.first - 1, vertex.second};
-    std::pair<int, int> down = {vertex.first + 1, vertex.second};
 
-    if (isValidNeighbor(left, graphVertexValue))
-        neighbors.push_back(left);
-    if (isValidNeighbor(right, graphVertexValue))
-        neighbors.push_back(right);
-    if (isValidNeighbor(up, graphVertexValue))
-        neighbors.push_back(up);
-    if (isValidNeighbor(down, graphVertexValue))
-        neighbors.push_back(down);
-    return (neighbors);
-}
+    std::vector<std::pair<int,int> > directions = {
+        {0, -1}, {0, 1}, {-1, 0}, {+1, 0},
+    };
 
-std::vector<std::pair<int, int>> bfs::getDiagonalNeighbors(std::pair<int, int> vertex) {
-    std::vector<std::pair<int, int>> neighbors;
-    int graphVertexValue = _graph[vertex.first][vertex.second];
-    std::pair<int, int> leftUp = {vertex.first - 1, vertex.second - 1};
-    std::pair<int, int> rightUp = {vertex.first - 1, vertex.second + 1};
-    std::pair<int, int> leftDown = {vertex.first + 1, vertex.second - 1};
-    std::pair<int, int> rightDown = {vertex.first + 1, vertex.second + 1};
+    for(const auto& direction : directions) {
+        std::pair<int,int> neighbor = {vertex.first + direction.first, vertex.second + direction.second};
+        if (isValidNeighbor(neighbor, graphVertexValue))
+            neighbors.push_back(neighbor);
+    }
 
-    if (isValidNeighbor(leftUp, graphVertexValue))
-        neighbors.push_back(leftUp);
-    if (isValidNeighbor(rightUp, graphVertexValue))
-        neighbors.push_back(rightUp);
-    if (isValidNeighbor(leftDown, graphVertexValue))
-        neighbors.push_back(leftDown);
-    if (isValidNeighbor(rightDown, graphVertexValue))
-        neighbors.push_back(rightDown);
     return (neighbors);
 }
 
@@ -119,33 +98,16 @@ std::vector<std::pair<int, int>> bfs::getAllNeighbors(std::pair<int, int> vertex
     std::vector<std::pair<int, int>> neighbors;
     int graphVertexValue = _graph[vertex.first][vertex.second];
 
-    std::pair<int, int> left = {vertex.first, vertex.second - 1};
-    std::pair<int, int> right = {vertex.first, vertex.second + 1};
-    std::pair<int, int> up = {vertex.first - 1, vertex.second};
-    std::pair<int, int> down = {vertex.first + 1, vertex.second};
+    std::vector<std::pair<int,int> > directions = {
+        {0, -1}, {0, 1}, {-1, 0}, {+1, 0},
+        {-1, -1}, {+1, -1}, {-1, +1}, {+1, +1}
+    };
 
-    if (isValidNeighbor(left, graphVertexValue))
-        neighbors.push_back(left);
-    if (isValidNeighbor(right, graphVertexValue))
-        neighbors.push_back(right);
-    if (isValidNeighbor(up, graphVertexValue))
-        neighbors.push_back(up);
-    if (isValidNeighbor(down, graphVertexValue))
-        neighbors.push_back(down);
-
-    std::pair<int, int> leftUp = {vertex.first - 1, vertex.second - 1};
-    std::pair<int, int> rightUp = {vertex.first - 1, vertex.second + 1};
-    std::pair<int, int> leftDown = {vertex.first + 1, vertex.second - 1};
-    std::pair<int, int> rightDown = {vertex.first + 1, vertex.second + 1};
-
-    if (isValidNeighbor(leftUp, graphVertexValue))
-        neighbors.push_back(leftUp);
-    if (isValidNeighbor(rightUp, graphVertexValue))
-        neighbors.push_back(rightUp);
-    if (isValidNeighbor(leftDown, graphVertexValue))
-        neighbors.push_back(leftDown);
-    if (isValidNeighbor(rightDown, graphVertexValue))
-        neighbors.push_back(rightDown);
+    for(const auto& direction : directions) {
+        std::pair<int,int> neighbor = {vertex.first + direction.first, vertex.second + direction.second};
+        if (isValidNeighbor(neighbor, graphVertexValue))
+            neighbors.push_back(neighbor);
+    }
 
     return (neighbors);
 }
