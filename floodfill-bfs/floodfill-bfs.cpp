@@ -124,10 +124,11 @@ void bfs::printValidPath() {
             std::pair<int, int> currentCoord = {i, j};
             bool existsInPath = std::find(_validPath.begin(), _validPath.end(), currentCoord) != _validPath.end();
             if (_targetVertex == std::pair<int, int>(i, j))
-                std::cout << "\033[33m";
+                std::cout << "\033[1;33m" << _graph[i][j];
             else if (existsInPath)
-                std::cout << "\033[32m";
-            std::cout << _graph[i][j];
+                std::cout << "\033[1;32m" << _graph[i][j];
+            else
+                std::cout << _graph[i][j];
             std::cout << "\033[0m";
         }
         std::cout << std::endl;
